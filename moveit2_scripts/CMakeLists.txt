@@ -74,11 +74,26 @@ ament_target_dependencies(test_trajectory3
 	moveit_ros_planning
 	control_msgs)
 
+add_executable(test_gripper
+    src/test_gripper.cpp)
+target_include_directories(test_gripper
+    PUBLIC include)
+ament_target_dependencies(test_gripper
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	interactive_markers
+	moveit_ros_planning
+	control_msgs)
+
 # Install the executable
 install(TARGETS 
 	test_trajectory
 	test_trajectory2
 	test_trajectory3
+	test_gripper
     DESTINATION lib/${PROJECT_NAME}
 )
 

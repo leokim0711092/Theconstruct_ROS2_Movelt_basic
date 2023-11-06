@@ -88,12 +88,27 @@ ament_target_dependencies(test_gripper
 	moveit_ros_planning
 	control_msgs)
 
+add_executable(approach_retreat
+    src/approach_retreat.cpp)
+target_include_directories(approach_retreat
+    PUBLIC include)
+ament_target_dependencies(approach_retreat
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	interactive_markers
+	moveit_ros_planning
+	control_msgs)
+
 # Install the executable
 install(TARGETS 
 	test_trajectory
 	test_trajectory2
 	test_trajectory3
 	test_gripper
+	approach_retreat
     DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -34,25 +34,27 @@ int main(int argc, char **argv) {
   std::copy(move_group.getJointModelGroupNames().begin(),
             move_group.getJointModelGroupNames().end(),
             std::ostream_iterator<std::string>(std::cout, ", "));
-
+    
   moveit::core::RobotStatePtr current_state = move_group.getCurrentState(10);
 
   std::vector<double> joint_group_positions;
   current_state->copyJointGroupPositions(joint_model_group,
                                          joint_group_positions);
 
-  // joint_group_positions[0] = 0.00;  // Shoulder Pan
-  joint_group_positions[1] = -2.50; // Shoulder Lift
+  //joint_group_positions[0] = 0.00;  // Shoulder Pan
+  joint_group_positions[1] = -2.50;  // Shoulder Lift
   joint_group_positions[2] = 1.50;  // Elbow
-  joint_group_positions[3] = -1.50; // Wrist 1
-  joint_group_positions[4] = -1.55; // Wrist 2
-  // joint_group_positions[5] = 0.00;  // Wrist 3
+  joint_group_positions[3] = -1.50;  // Wrist 1
+  joint_group_positions[4] = -1.55;  // Wrist 2
+  //joint_group_positions[5] = 0.00;  // Wrist 3
   move_group.setJointValueTarget(joint_group_positions);
-
+    
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;
 
   bool success =
       (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+    
+  move_group.execute(my_plan);
 
   rclcpp::shutdown();
   return 0;

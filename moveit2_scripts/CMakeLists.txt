@@ -118,6 +118,23 @@ ament_target_dependencies(cartesian_path
 	control_msgs
 	)
 
+
+# Generate the executable
+add_executable(test_kinematics_plugin
+    src/test_kinematics_plugin.cpp)
+target_include_directories(test_kinematics_plugin
+    PUBLIC include)
+ament_target_dependencies(test_kinematics_plugin
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	interactive_markers
+	moveit_ros_planning
+	control_msgs
+	)
+
 # Install the executable
 install(TARGETS 
 	test_trajectory
@@ -126,6 +143,7 @@ install(TARGETS
 	test_gripper
 	approach_retreat
 	cartesian_path
+	test_kinematics_plugin
     DESTINATION lib/${PROJECT_NAME}
 )
 

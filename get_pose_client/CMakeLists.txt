@@ -35,9 +35,17 @@ ament_target_dependencies(get_pose_client_GetSize
   "rclcpp_action"
   "grasping_msgs")
 
+  add_executable(get_pose_client_FilterSize src/get_pose_client_FilterSize.cpp)
+ament_target_dependencies(get_pose_client_FilterSize
+  "rclcpp"
+  "rclcpp_action"
+  "grasping_msgs")
+
 install(TARGETS
   get_pose_client
   get_pose_client_GetSize
+  get_pose_client_FilterSize
+  
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
